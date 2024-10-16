@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class SortingAlgorithm {
     public final int[] array = {
@@ -12,11 +15,36 @@ public class SortingAlgorithm {
     private int currentBar1 = -1;
     private int currentBar2 = -1;
     boolean isDone = false;
+
+    void setSortingAlgo(String algo){
+        if(algo.equalsIgnoreCase("BUBBLE"))
+            bubbleSortStep();
+        else if(algo.equalsIgnoreCase("SELECTION"))
+            selectionSortStep();
+        else if(algo.equalsIgnoreCase("INSERTION"))
+            insertionSortStep();
+        else if(algo.equalsIgnoreCase("GNOME"))
+            gnomeSortStep();
+    }
+
+    //Fisher-Yates shuffle algorithm
+    public void shuffleArray(int[] array) {
+        Random rand = new Random();
+        for (int i = array.length - 1; i > 0; i--) {
+            int j = rand.nextInt(i + 1); // Pick a random index from 0 to i
+
+            // Swap array[i] with array[j]
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
     private void reset() {
         i = 0;
         j = 0;
         currentBar1 = -1;
         currentBar2 = -1;
+        isDone = false;
     }
 
     // Getter and Setter for current bars
@@ -57,7 +85,7 @@ public class SortingAlgorithm {
         } else {
             reset();
             isDone = true;
-            MyPanel.timer.stop();
+           // MyPanel.timer.stop();
         }
     }
 
@@ -84,7 +112,7 @@ public class SortingAlgorithm {
         } else {
             reset();
             isDone = true;
-            MyPanel.timer.stop();
+          //  MyPanel.timer.stop();
 
         }
     }
@@ -106,7 +134,7 @@ public class SortingAlgorithm {
         } else {
            reset();
             isDone = true;
-            MyPanel.timer.stop(); // Sorting completed
+           // MyPanel.timer.stop(); // Sorting completed
         }
     }
 
@@ -136,7 +164,7 @@ public class SortingAlgorithm {
             }
         } else {
             isDone = true;
-            MyPanel.timer.stop();
+           // MyPanel.timer.stop();
             reset();
         }
     }
